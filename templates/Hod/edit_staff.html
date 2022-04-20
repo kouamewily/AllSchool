@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-sm-12">
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="{% url 'update_staff' %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					
+						<div class="col-12">
+							<h5 class="form-title"><span>Edit Enseignant</span>
+							</h5>
+							
+						</div>
+
+						{% include 'include/messages.html' %}
+						
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Image Profile</label>
+								<input type="file" class="form-control" name="profile_img">
+								<input type="text" class="form-control" name="staff_id" value="{{ staff.adm.id}}" hidden="">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Nom</label>
+								<input type="text" class="form-control" name="first_name" required="" value="{{ staff.adm.first_name}}">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Prénom</label>
+								<input type="text" class="form-control" name="last_name" required="" value="{{ staff.adm.last_name}}">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" name="email" required="" value="{{ staff.adm.email}}" readonly="">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Username</label>
+								<input type="text" class="form-control"  name="username" required="" value="{{ staff.adm.username}}" readonly="">
+								
+							</div>
+							
+						</div>
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Password</label>
+								<input type="password" class="form-control" name="password" placeholder="si vous garder le meme mp , laisser cette partie vide">
+								
+							</div>
+
+							<div class="col-sm-11">
+							<div class="form-group">
+								<label>Adresse</label>
+								<textarea class="form-control" name="address" required="">{{ staff.address}}</textarea>
+								
+							</div>
+							
+						</div>
+
+						<div class=" col-sm-11">
+							<label>Genre</label>
+							<select class="form-control" name="genre" required=""> 
+								<option>Femme</option>
+								<option>Homme</option>
+							</select>
+						</div>
+
+						<br>
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Edit
+								
+							</button>
+							
+						</div>
+					
+					
+				</form>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+{% endblock %}

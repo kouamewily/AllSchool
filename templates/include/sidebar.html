@@ -1,0 +1,144 @@
+{% load static %}
+<div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+               <div id="sidebar-menu" class="sidebar-menu">
+                  <ul>
+                      {% if user.user_type == '1' %}
+                     
+                     <li class="submenu">
+                        <a href="#"><i class="fas fa-user-graduate"></i> <span> Elève</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="{% url 'add_student' %}">Ajout Elève </a></li>
+                           <li><a href="{% url 'view_student' %}">Liste Elève</a></li>
+                          
+                           
+                        </ul>
+                     </li>
+                     <li class="submenu">
+                        <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Enseignant</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'view_staff' %}">Liste Enseignant</a></li>
+                           <li><a href="{% url 'add_staff' %}">Ajout Enseignant </a></li>
+                           
+                        </ul>
+                     </li>
+                     <li class="submenu">
+                        <a href="#"><i class="fa fa-graduation-cap"></i> <span>Classe</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'view_course' %}">Liste Classe </a></li>
+                           <li><a href="{% url 'add_classe' %}">Ajout Classe</a></li>
+                           
+                        </ul>
+                     </li>
+                     <li class="submenu">
+                        <a href="#"><i class="fas fa-book-reader"></i> <span>Matière</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'view_matiere' %}">Liste Matière </a></li>
+                           <li><a href="{% url 'add_subject' %}">Ajout Matière</a></li>
+                           
+                        </ul>
+                     </li>
+
+                     <li class="submenu">
+                        <a href="#"><i class="fas fa-clock"></i> <span>Session</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'add_session' %}">Ajout Session </a></li>
+                           <li><a href="{% url 'list_session' %}">Liste Session</a></li>
+                        </ul>
+                     </li>
+                      <li>
+                        <a href="{% url 'envoi_notif_staff' %}"><i class="fa fa-bell"></i> <span>Notification Professeur </span></a>
+                     </li>
+                      <li>
+                        <a href="{% url 'send_stud_notif' %}"><i class="fa fa-bell"></i> <span>Notification Eleve</span></a>
+                     </li>
+                      <li>
+                        <a href="{% url 'view_attend' %}"><i class="fa fa-calendar"></i> <span>Présence </span></a>
+                     </li>
+                      <li>
+                        <a href="{% url 'staff_feedback' %}"><i class="fas fa-comments"></i> <span>Commentaire Professeur</span></a>
+                     </li>
+                      <li>
+                        <a href="{% url 'stud_feedback_reply' %}"><i class="fas fa-comments"></i> <span>Commentaire ELeve</span></a>
+                     </li>
+                      <li>
+                        <a href="{% url 'voir_depart_conge' %}"><i class="fas fa-envelope"></i> <span>Conge Prof</span></a>
+                     </li>
+                      <li>
+                        <a href="#"><i class="fas fa-envelope"></i> <span>Congé Eleve</span></a>
+                     </li>
+                       <li>
+                        <a href="#"><i class="fas fa-envelope"></i> <span>Scolarité</span></a>
+                     </li>
+                      <li><i class=""></i>
+                        <a href="{% url 'dologout' %}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+                     </li>
+                     
+                        </ul>
+                    {% elif user.user_type == '2' %}
+
+                     <li>
+                        <a href="{% url 'homeadmin' %}"><i class="fas fa-holly-berry"></i> <span>Dashboard</span></a>
+                     </li>
+
+                      <li>
+                        <a href="{% url 'staff_take_attendance' %}"><i class="fas fa-calendar-alt"></i> <span>Présence scolaire</span></a>
+                     </li>
+
+                      <li>
+                        <a href="{% url 'staff_view_attendance' %}"><i class="fas fa-calendar-alt"></i> <span>Liste ou Modif Présence</span></a>
+                     </li>
+
+                      <li>
+                        <a href="{% url 'staff_ajout_note' %}"><i class="fas fa-poll-h"></i> <span>Ajout résultat</span></a>
+                     </li>
+
+                      <li>
+                        <a href="{% url 'depart_conge' %}"><i class="fas fa-envelope-open"></i> <span>Demande Congé</span></a>
+                     </li>
+
+                      <li>
+                        <a href="{% url 'feedback' %}"><i class="fas fa-comments"></i> <span>Commentaire</span></a>
+                     </li>
+
+                     <li>
+                        <a href="{% url 'notif_recev' %}"><i class="fas fa-bell"></i> <span>Notifications</span></a>
+                     </li>
+
+
+                      <li><i class=""></i>
+                        <a href="{% url 'dologout' %}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+                     </li>
+                     
+                    {% else %}
+                     <li class="submenu">
+                        <a href="{% url 'home_stud' %}"><i class="fas fa-holly-berry"></i> <span>Dashboard</span> <span class="menu-arrow"></span></a>
+
+                     </li>
+                   <li class="">
+                       <a href="{% url 'stud_view_result' %}"><i class="fa fa-calendar" aria-hidden="true"></i> <span>Resultat</span></a>
+                   </li>
+                    <li class="">
+                       <a href="{% url 'stud_view_attend' %}"><i class="fa fa-calendar" aria-hidden="true"></i> <span>Présence</span></a>
+                   </li>
+                    <li class="">
+                       <a href=""><i class="fa fa-pray" aria-hidden="true"></i> <span>Leave</span></a>
+                   </li>
+                    <li class="">
+                       <a href="{% url 'stud_feedback' %}"><i class="fa fa-comment" aria-hidden="true"></i> <span>Commentaire</span></a>
+                   </li>
+                    <li class="">
+                       <a href="{% url 'notif_recev' %}"><i class="fa fa-bell" aria-hidden="true"></i> <span>Notification</span></a>
+                   </li>
+                    <li class="">
+                       <a href=""><i class="fa fa-calendar" aria-hidden="true"></i> <span>Déconecter</span></a>
+                   </li>
+
+                    {% endif %}
+
+                     </li>
+                  
+                  </ul>
+               </div>
+            </div>
+         </div>

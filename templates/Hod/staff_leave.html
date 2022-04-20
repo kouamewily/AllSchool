@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Liste des congés</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Liste </a></li>
+                           <li class="breadcrumb-item active">Congé</li>
+                        </ul>
+                     </div>
+                     <div class="col-auto text-right float-right ml-auto">
+                        <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i>Exporter</a>
+                        <a href="{% url 'add_student' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0 datatable">
+                                 <thead>
+                                    <tr>
+                                       <th>ID</th>
+                                       <th>Name du Prof</th>
+                                       <th>Date Depart</th>
+                                       <th>Message</th>
+                                       <th class="text-right">Action</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 	{% for i in leave_view %}
+                                    <tr>
+                                       <td>{{i.id}}</td>
+                                       <td>
+                                          <h2 class="table-avatar">
+                                             </a>
+                                             <a href="student-details.html">{{i.staff_id.adm.first_name}}</a>
+                                          </h2>
+                                       </td>
+                                      
+                                       <td>{{i.data}}</td>
+                                       <td>{{i.message}}</td>
+                                       <td class="text-right">
+                                          <div class="actions">
+
+                                             {% if i.status == 0 %}
+                                             <a href="{% url 'approuve_conge'  i.id %}" class="btn btn-success">Approuver</a>
+                                             <a href="{% url 'desapprouve_conge' i.id %}" class="btn btn-danger">Desaprouver</a>
+
+                                             {% elif i.status == 1 %}
+                                             <button class="btn btn-success" disabled="disabled">Approuver</button>
+                                             {% else %}
+                                             <button class="btn btn-danger" disabled="disabled">Approuver</button>
+                                             {% endif %}
+
+
+
+                                          </div>
+                                       </td>
+                                    </tr>
+                                   {% endfor %} 
+                                    
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Ajout Matière</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="subjects.html">Matière</a></li>
+<li class="breadcrumb-item active">Ajout Matière</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+
+<form method="POST" action="{% url 'add_subject' %}">
+	{% csrf_token %}
+	<div class="row">
+	<div class="col-12">
+	<h5 class="form-title"><span>Information Matière</span></h5>
+	</div>
+	<div class="col-12 col-sm-6">
+	<div class="form-group">
+	<label>Matière</label>
+	<input type="text" class="form-control" name="matiere">
+	</div>
+	</div>
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Enseignants</label>
+								
+								<select class="form-control" name="staff_id" required=""> 
+									{% for i in staff %}
+									<option value="{{i.id}}">{{i.adm.first_name}}</option>
+									{% endfor %}
+									
+								</select>
+								</div>
+							</div>
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Classe</label>
+								<select class="form-control" name="cours_id" required=""> 
+									{% for i in cours %}
+									<option value="{{i.id}}">{{i.name}}</option>
+									{% endfor %}
+									
+								</select>
+								</div>
+							</div>
+
+	<div class="col-12">
+	<button type="submit" class="btn btn-primary">Ajout</button>
+	</div>
+	</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

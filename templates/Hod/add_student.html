@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-sm-12">
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="{% url 'add_student' %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					
+						<div class="col-12">
+							<h5 class="form-title"><span>Ajout Eleve</span>
+							</h5>
+							
+						</div>
+
+						{% include 'include/messages.html' %}
+
+
+					<div class="col-sm-11">
+							<div class="form-group">
+								<label>Matricule</label>
+								<input class="form-control" name="address" required="">
+
+							</div>
+
+						</div>
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Nom</label>
+								<input type="text" class="form-control" name="first_name" required="">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Prenom</label>
+								<input type="text" class="form-control" name="last_name" required="">
+								
+							</div>
+							
+						</div>
+
+					<div class="col-sm-11">
+							<div class="form-group">
+								<label>Image Profile</label>
+								<input type="file" class="form-control" name="profile_img" required="">
+
+							</div>
+
+						</div>
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" name="email" required="">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Username</label>
+								<input type="text" class="form-control"  name="username" required="">
+								
+							</div>
+							
+						</div>
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Password</label>
+								<input type="password" class="form-control" name="password" required="">
+								
+							</div>
+
+							<div class="col-sm-11">
+							<div class="form-group">
+								<label>Adresse</label>
+								<textarea class="form-control" name="address" required=""></textarea>
+								
+							</div>
+							
+						</div>
+
+						<div class=" col-sm-11">
+							<label>Genre</label>
+							<select class="form-control" name="genre" required=""> 
+								<option>Femme</option>
+								<option>Homme</option>
+							</select>
+						</div>
+
+						<div class=" col-sm-11">
+							<label>Cours</label>
+							<select class="form-control" name="cours_id" required=""> 
+								{% for i in cours %}
+								<option value="{{i.id}}">{{i.name}}</option>
+								{% endfor %}
+								
+							</select>
+						</div>
+
+						<div class=" col-sm-11">
+							<label>Session</label>
+							<select class="form-control" name="session_id" required=""> 
+								{% for i in session %}
+								<option value="{{i.id}}">{{i.session_start}} -{{i.session_end}} </option>
+								{% endfor %}
+								
+								
+								
+							</select>
+						</div>
+							
+						</div>
+						<br>
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Ajout Eleve
+								
+							</button>
+							
+						</div>
+					
+					
+				</form>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+{% endblock %}

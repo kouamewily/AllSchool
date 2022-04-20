@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if action is None  %}
+
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="?action=voir_presence">
+					{% csrf_token %}
+
+						<div class="col-12">
+							<h5 class="form-title"><span>Liste de présence</span>
+							</h5>
+
+						</div>
+
+						{% include 'include/messages.html' %}
+
+
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label> choisir la Matière</label>
+								<select class="form-control" name="subject_id" required="">
+									{% for i in subject %}
+									<option value="{{i.id}}">{{i.name}}</option>
+									{% endfor %}
+
+								</select>
+							</div>
+
+						</div>
+
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Modifier Classe
+
+							</button>
+
+						</div>
+
+
+				</form>
+
+
+
+		</div>
+
+		</div>
+
+	</div>
+ {% else  %}
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="?action=voir_presence">
+					{% csrf_token %}
+
+						<div class="col-12">
+							<h5 class="form-title"><span>Liste de présence</span>
+							</h5>
+
+						</div>
+
+						{% include 'include/messages.html' %}
+
+
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label> choisir la Matière</label>
+								<select class="form-control" name="subject_id" disabled>
+
+									<option value="{{i.id}}">{{get_subject}}</option>
+
+
+								</select>
+							</div>
+
+						</div>
+
+						<div class="col-12">
+							<div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0 datatable">
+                                 <thead>
+                                    <tr>
+                                       <th>Date</th>
+                                       <th>Matière</th>
+                                       <th>Session</th>
+
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 	{% for i in attend_report %}
+                                    <tr>
+                                       <td>{{i.attend_id.attendance_data}}</td>
+                                       <td>{{i.attend_id.subject_id.name}}</td>
+
+                                       <td>{{i.attend_id.session_id.session_start}} AU {{i.attend_id.session_id.session_end}}</td>
+
+                                    </tr>
+                                   {% endfor %}
+
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+						</div>
+
+
+				</form>
+
+
+
+		</div>
+
+		</div>
+
+	</div>
+
+ {% endif %}
+{% endblock %}

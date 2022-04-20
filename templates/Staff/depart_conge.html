@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+<div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Liste Eleve</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Liste </a></li>
+                           <li class="breadcrumb-item active">Eleve</li>
+                        </ul>
+                     </div>
+                     <div class="col-auto text-right float-right ml-auto">
+                        <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i>Exporter</a>
+
+						 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sendnotif">
+							 <i class="fas fa-pray"></i>&nbsp;Historiques
+										</button>
+
+                     </div>
+                  </div>
+               </div>
+
+
+<div class="col-sm-12">
+
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="{% url 'depart_save' %}">
+					{% csrf_token %}
+
+						<div class="col-12">
+							<h5 class="form-title"><span>Depart en congé</span>
+							</h5>
+
+						</div>
+
+						{% include 'include/messages.html' %}
+
+						<div class="col-sm-11">
+							<div class="form-group">
+								<label>Date de Départ</label>
+								<input type="date" class="form-control" name="date_conge" required="">
+
+							</div>
+
+						</div>
+
+					<div class="col-sm-11">
+							<div class="form-group">
+								<label>Message</label>
+								<textarea class="form-control" name="message_conge" required=""></textarea>
+							</div>
+
+						</div>
+
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Demande Conge
+
+							</button>
+
+						</div>
+
+
+				</form>
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal" id="sendnotif" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Envoi</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="close"></button>
+      </div>
+      <div class="modal-body">
+
+		   <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0 datatable">
+                                 <thead>
+                                    <tr>
+
+                                       <th>Date</th>
+                                       <th>Message</th>
+                                       <th>Status</th>
+
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 	{% for i in historique_conge %}
+                                    <tr>
+                                       <td>{{i.data}}</td>
+                                       <td>
+                                          <h2 class="table-avatar">
+                                             </a>
+                                             <a href="student-details.html">{{i.message}}</a>
+                                          </h2>
+                                       </td>
+
+
+                                       <td class="text-right">
+                                          <div class="actions">
+                                            {% if i.status == 0 %}
+                                              <span class="badge badge-info">requête en attente</span>
+
+                                            {% elif i.status == 1 %}
+                                            <span class="badge badge-success">accepté</span>
+                                            {% else %}
+                                            <span class="badge badge-danger">refuser</span>
+                                            {% endif %}
+                                          </div>
+                                       </td>
+                                    </tr>
+                                   {% endfor %}
+
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+ {% endblock %}

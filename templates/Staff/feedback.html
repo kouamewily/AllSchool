@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+<div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Commentaire</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Liste </a></li>
+                           <li class="breadcrumb-item active">Commentaire</li>
+                        </ul>
+                     </div>
+                     <div class="col-auto text-right float-right ml-auto">
+                        <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i>Exporter</a>
+
+						 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sendnotif">
+							 <i class="fas fa-comment"></i>&nbsp;Historiques
+										</button>
+
+                     </div>
+                  </div>
+               </div>
+
+
+<div class="col-sm-12">
+
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="{% url 'feedback_save' %}">
+					{% csrf_token %}
+
+						<div class="col-12">
+							<h5 class="form-title"><span>Commentaire</span>
+							</h5>
+
+						</div>
+
+						{% include 'include/messages.html' %}
+
+
+
+
+					<div class="col-sm-11">
+							<div class="form-group">
+								<label>Message</label>
+								<textarea class="form-control" name="feedback" required=""></textarea>
+							</div>
+
+						</div>
+
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Commenter
+
+							</button>
+
+						</div>
+
+
+				</form>
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal" id="sendnotif" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Envoi</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="close"></button>
+      </div>
+      <div class="modal-body">
+
+		   <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0 datatable">
+                                 <thead>
+                                    <tr>
+
+                                       <th>ID</th>
+                                       <th>Commentaire</th>
+                                       <th>retour</th>
+
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 	{% for i in historique_feedback %}
+                                    <tr>
+                                       <td>{{i.id}}</td>
+                                       <td>
+                                          <h2 class="table-avatar">
+                                             </a>
+                                             <a href="student-details.html">{{i.feedback}}</a>
+                                          </h2>
+                                       </td>
+                                         <td>
+                                          <h2 class="table-avatar">
+                                             </a>
+                                             <a href="student-details.html">{{i.feedback_reply}}</a>
+                                          </h2>
+                                       </td>
+
+
+                                       <td>
+
+                                            {% if i.feedback_reply == "" %}
+                                              <span class="badge badge-info">No reply</span>
+                                              </td>
+                                            {% else %}
+                                        <td>
+                                            <span class="badge badge-danger">{{i.feedback_reply}}</span>
+                                            {% endif %}
+
+                                       </td>
+                                    </tr>
+                                   {% endfor %}
+
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary">Envoi</button>
+      </div>
+    </div>
+  </div>
+</div>
+ {% endblock %}

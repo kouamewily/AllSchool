@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Edit Session</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="subjects.html">Session</a></li>
+<li class="breadcrumb-item active">Edit Session</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+
+<form method="POST" action="{% url 'add_session' %}">
+	{% csrf_token %}
+<div class="row">
+	<div class="col-12">
+	<h5 class="form-title"><span>Session</span></h5>
+	</div>
+							<div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                       <label>Date Début</label>
+                                       <div>
+                                          <input type="date" class="form-control" name="start_session" required="" value="{% for i in sess %} {{i.session_start}}
+
+                                           {% endfor %}">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                       <label>Date de fin</label>
+                                       <div>
+                                          <input type="date" class="form-control" name="end_session" required="" value="{% for i in session %} {{i.session_end}} {% endfor %}">
+                                       </div>
+                                    </div>
+                                 </div>
+
+							
+						
+
+	<div class="col-12">
+	<button type="submit" class="btn btn-primary">Editer</button>
+	</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

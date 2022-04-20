@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="{% url 'profile_modif' %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					
+						<div class="col-12">
+							<h5 class="form-title"><span>Modification Profile</span>
+								
+							</h5>
+							
+						</div>
+						
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Image Profile</label>
+								<input type="file" class="form-control" name="profile_img">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Nom</label>
+								<input type="text" class="form-control" name="first_name" value="{{user.first_name}}">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Prénom</label>
+								<input type="text" class="form-control" name="last_name" value="{{user.last_name}}">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" readonly="" name="email" value="{{user.email}}">
+								
+							</div>
+							
+						</div>
+
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Username</label>
+								<input type="text" class="form-control" readonly="" name="username" value="{{user.username}}">
+								
+							</div>
+							
+						</div>
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Password</label>
+								<input type="password" class="form-control" name="password">
+								
+							</div>
+							
+						</div>
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Modifier Profile
+								
+							</button>
+							
+						</div>
+					
+					
+				</form>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+{% endblock %}

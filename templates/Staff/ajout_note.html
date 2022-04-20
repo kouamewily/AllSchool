@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Ajout De Note</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="subjects.html">Note</a></li>
+<li class="breadcrumb-item active">Note</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+
+{% if action is None  %}
+<form method="POST" action="?action=get_note">
+	{% csrf_token %}
+	<div class="row">
+	<div class="col-12">
+	<h5 class="form-title"><span>Note</span></h5>
+	</div>
+
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Matière</label>
+								
+								<select class="form-control" name="subject_id" required="">
+									{% for i in subject %}
+									<option value="{{i.id}}">{{i.name}}</option>
+									{% endfor %}
+									
+								</select>
+								</div>
+							</div>
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Session</label>
+								<select class="form-control" name="session_id" required="">
+									{% for i in session %}
+									<option value="{{i.id}}">{{i.session_start}}-{{i.session_end}}</option>
+									{% endfor %}
+									
+								</select>
+								</div>
+							</div>
+
+	<div class="col-12">
+	<button type="submit" class="btn btn-primary">Liste Elève</button>
+	</div>
+	</div>
+</form>
+{% else %}
+<form method="POST" action="{% url 'staff_save_note' %}">
+	{% csrf_token %}
+	<div class="row">
+	<div class="col-12">
+	<h5 class="form-title"><span> Matière</span></h5>
+	</div>
+
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Matières</label>
+
+								<select class="form-control" name="subject_id" required="">
+
+									<option value="{{get_subject.id}}">{{get_subject}}</option>
+
+
+								</select>
+								</div>
+							</div>
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Session</label>
+								<select class="form-control" name="session_id" required="">
+
+									<option value="{{get_session.id}}">{{get_session}}</option>
+
+
+								</select>
+								</div>
+								</div>
+
+
+
+
+									<div class="col-12 col-sm-12">
+
+									<div class="form-group">
+										<select class="form-control" name="student_id">
+											{% for i in studs %}
+											<option value="{{i.adm.id}}">{{i.adm.first_name}}</option>
+											{% endfor %}
+										</select>
+
+
+									</div>
+
+									</div>
+
+								<div class="col-12 col-sm-6">
+									<div class="form-group">
+									<label>Evaluation</label>
+										<input type="number" class="form-control" name="evaluation">
+									</div>
+								</div>
+							<div class="col-12 col-sm-6">
+									<div class="form-group">
+									<label>Examen</label>
+										<input type="number" class="form-control" name="examen">
+									</div>
+							</div>
+
+							<br>
+
+	<div class="col-12 mt-4">
+	<button type="submit" class="btn btn-primary">Ajout</button>
+	</div>
+	</div>
+</form>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

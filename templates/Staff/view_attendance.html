@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Liste De Présence</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="subjects.html">Présence</a></li>
+<li class="breadcrumb-item active">Liste</li>
+</ul>
+</div>
+</div>
+</div>
+
+{% if action is None  %}
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+
+
+<form method="POST" action="?action=view_attend">
+	{% csrf_token %}
+	<div class="row">
+	<div class="col-12">
+	<h5 class="form-title"><span>PRESENCES</span></h5>
+	</div>
+
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Matière</label>
+								
+								<select class="form-control" name="subject_id" required="">
+									{% for i in subject %}
+									<option value="{{i.id}}">{{i.name}}</option>
+									{% endfor %}
+									
+								</select>
+								</div>
+							</div>
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Session</label>
+								<select class="form-control" name="session_id" required="">
+									{% for i in session %}
+									<option value="{{i.id}}">{{i.session_start}}-{{i.session_end}}</option>
+									{% endfor %}
+									
+								</select>
+								</div>
+							</div>
+                             <div class="col-12 col-sm-6 mt-4">
+								<div class="form-group">
+									<label>Attendance Date</label>
+								<input type="date" class="form-control" name="attendance_date" required="">
+								</div>
+							</div>
+
+	<div class="col-12">
+	<button type="submit" class="btn btn-primary">Liste Elève</button>
+	</div>
+	</div>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+
+{% else %}
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+
+
+<form method="POST" action="?action=view_attend">
+	{% csrf_token %}
+	<div class="row">
+	<div class="col-12">
+	<h5 class="form-title"><span>Absence</span></h5>
+	</div>
+
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Matière</label>
+
+								<select class="form-control" name="subject_id" disabled>
+
+									<option value="{{i.id}}">{{get_subject}}</option>
+
+
+								</select>
+								</div>
+							</div>
+
+							<div class="col-12 col-sm-6">
+								<div class="form-group">
+									<label>Session</label>
+								<select class="form-control" name="session_id" disabled>
+									<option value="{{i.id}}">{{get_session}}</option>
+
+
+								</select>
+								</div>
+							</div>
+                             <div class="col-12 col-sm-6 mt-4">
+								<div class="form-group">
+									<label>Date des absences</label>
+								<input type="date" class="form-control" name="attendance_date" value="{{attendance_date}}" disabled>
+								</div>
+							</div>
+
+	<div class="col-12 mt-4">
+
+		 <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0 datatable">
+                                 <thead>
+                                    <tr>
+                                       <th>ID</th>
+                                       <th>Nom</th>
+                                       <th>Email</th>
+
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 	{% for i in attendace_report %}
+                                    <tr>
+                                       <td>{{i.stud_id.adm.id}}</td>
+                                       <td>{{i.stud_id.adm.first_name}} </td>
+										<td>{{i.stud_id.adm.email}} </td>
+
+
+                                    </tr>
+                                   {% endfor %}
+
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+	</div>
+	</div>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+
+{% endif %}
+</div>
+
+{% endblock %}
