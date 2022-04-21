@@ -3001,15 +3001,7 @@ table.table-inbox tbody tr.checked {
 		color: #fff;
 		font-size: 18px;
 	}
-	.fa-twitter {
-		bottom: -6px !important;
-	}
-	.fa-instagram {
-		bottom: -4px !important;
-	}
-	.fa-linkedin-in {
-		bottom: -9px !important;
-	}
+
 }
 
 @media (min-width:768px) {
